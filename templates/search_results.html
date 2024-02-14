@@ -38,23 +38,20 @@
                 <th>Camera</th>
                 <th>Plate</th>
                 <th>Time</th>
-                <th>Image</th>
             </tr>
         </thead>
         <tbody>
             {% for record in results %}
                 <tr>
                     <td>{{ record.camera_name }}</td>
-                    <td>{{ record.plate_number.upper() }}</td>
-                    <td>{{ record.detection_time }}</td>
                     <td>
                         {% if record.has_image %}
-                            <!-- Display image directly or as a clickable link -->
-                            <a href="{{ url_for('serve_plate_image', filename=record.has_image) }}" target="_blank">{{ record.has_image }}</a>
+                        <a href="{{ url_for('serve_plate_image', filename=record.has_image) }}">{{ record.plate_number.upper() }}</a>
                         {% else %}
-                            None
+                            {{ record.plate_number.upper() }}
                         {% endif %}
                     </td>
+                    <td>{{ record.detection_time }}</td>
             {% endfor %}
         </tbody>
     </table>
