@@ -17,7 +17,7 @@
             text-align: left;
         }
         th {
-            background-color: #4CAF50;
+            background-color: #007bff; <!--#4CAF50-->;
             color: white;
         }
         tr:nth-child(even) {
@@ -35,26 +35,26 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Camera</th>
                 <th>Plate</th>
-                <th>Score</th>
                 <th>Time</th>
-                <th>Event</th>
                 <th>Image</th>
             </tr>
         </thead>
         <tbody>
             {% for record in results %}
                 <tr>
-                    <td>{{ record.id }}</td>
                     <td>{{ record.camera_name }}</td>
-                    <td>{{ record.plate_number }}</td>
-                    <td>{{ record.score }}</td>
+                    <td>{{ record.plate_number.upper() }}</td>
                     <td>{{ record.detection_time }}</td>
-                    <td>{{ record.frigate_event }}</td>
-                    <td>{{ record.has_image }}</td>
-                </tr>
+                    <td>
+                        {% if record.has_image %}
+                            <!-- Display image directly or as a clickable link -->
+                            <a href="{{ url_for('serve_plate_image', filename=record.has_image) }}" target="_blank">{{ record.has_image }}</a>
+                        {% else %}
+                            None
+                        {% endif %}
+                    </td>
             {% endfor %}
         </tbody>
     </table>
