@@ -22,6 +22,6 @@ class ProdConfig(Config):
 
 The default port is set to 5555, and it will use the IP address of the machine it's running on. If you need to change the port, you can find the setting at the bottom of the app.py file.
 
-'''
+```
 python3 app.py
-'''
+```
