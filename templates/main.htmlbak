@@ -17,8 +17,9 @@
             font-size: 36px;
         }
 
+
         h2 {
-            text-align: center; /* Center-align the subtitle */
+            text-align: center; /* Center-align the title */
             margin-top: 50px; /* Add some spacing on the top */
         }
 
@@ -41,21 +42,6 @@
             color: white; /* White text for better contrast */
             font-weight: bold; /* Make the font bold */
         }
-
-        log-section {
-            background-color: #eeeeee; /* Light grey background for the log section */
-            margin: 20px; /* Margin around the log section */
-            padding: 20px; /* Padding inside the log section */
-            border-radius: 5px; /* Rounded corners for the log section */
-        }
-
-        log-section > div {
-            background-color: #fff; /* Set a white background for log entries */
-            border: 1px solid #ddd; /* Add a border around log entries for definition */
-            border-radius: 5px; /* Round the corners of the borders */
-            padding: 15px; /* Add padding inside log entries */
-            margin-top: 20px; /* Add space between the heading and log entries */
-        }
     </style>
 </head>
 <body>
@@ -65,12 +51,5 @@
         <li><a href="/search_page">Search License Plates</a></li>
         <li><a href="/logs">View Logs</a></li>
     </ul>
-    <!-- Log Display Section -->
-    <div id="log-section">
-        <h2>Error Logs</h2>
-        <div>
-           {{ error_log_html|safe }}
-        </div>
-    </div>
 </body>
 </html>

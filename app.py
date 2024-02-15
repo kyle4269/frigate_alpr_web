@@ -32,7 +32,20 @@ def serve_plate_image(filename):
 
 @app.route('/menu')
 def menu():
-    return render_template('main.html')
+    log_file_path = '/home/lpr/dev/config/frigate_plate_recogizer.log'
+    try:
+        with open(log_file_path, 'r') as file:
+            all_logs = file.readlines()
+            error_logs = [log for log in all_logs if "ERROR" in log][-50:]  # Adjust the slice as needed
+            error_logs = error_logs[::-1]  # Reverse for chronological order
+    except Exception as e:
+        error_logs = [f"Error reading log file: {e}"]
+    error_log_html = '<br>'.join(error_logs)
+    return render_template('main.html', error_log_html=error_log_html)
+
+
+#    return render_template('main.html')
+
 @app.route('/search_page', methods=['GET'])
 def search_page():
     return render_template('search_page.html')
@@ -51,12 +64,12 @@ def search():
     return render_template('search_results.html', results=results)
 
 @app.route('/logs')
-def logs():
+def all_logs():
     log_file_path = '/home/lpr/dev/config/frigate_plate_recogizer.log'
     try:
         with open(log_file_path, 'r') as file:
             # Read the last 50 lines of the log file
-            logs = file.readlines()[-50:]
+            logs = file.readlines()[-50000:]
             logs = logs[::-1]
     except Exception as e:
         logs = [f"Error reading log file: {e}"]
