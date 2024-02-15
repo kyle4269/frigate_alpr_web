@@ -107,16 +107,7 @@ def search():
         search_term += '%'
 
     results = Plates.query.filter(Plates.plate_number.like(f'%{search_term}%')).order_by(Plates.detection_time.desc()).all()
-#    # Modify below to include image checks and URL generation
-#    result_html = '<br>'.join([
-#        f'ID: {record.id}, Camera: {record.camera_name}, Plate: {record.plate_number}, Score: {record.score}, Time: {record.detection_time}, Event: {record.frigate_event}, ImagePath: <a href="{url_for("serve_plate_image", filename=record.has_image)}">{record.has_image}</a>' 
-#        if record.has_image and os.path.exists(os.path.join('/mnt/plates', record.has_image)) 
-#        else f'ID: {record.id}, Camera: {record.camera_name}, Plate: {record.plate_number}, Score: {record.score}, Time: {record.detection_time}, Event: {record.frigate_event}, ImagePath: None' 
-#        for record in results])
-
-#    result_html = '<br>'.join([f'ID: {record.id}, Camera: {record.camera_name}, Plate: {record.plate_number}, Score: {record.score}, Time: {record.detection_time}, Event: {record.frigate_event}, ImagePath: {record.has_image}' for record in results])
     return render_template('search_results.html', results=results)
-
 
 @app.route('/logs')
 def logs():
@@ -146,4 +137,5 @@ def get_ip():
 if __name__ == '__main__':
     ip_address = get_ip()
 #    serve(app, host=ip_address, port=5555)
+    # To debug app
     app.run(host=ip_address, port=5000, debug=True)
