@@ -12,7 +12,7 @@ from config import DevConfig, ProdConfig, Config
 app = Flask(__name__)
 
 # Change to ProdConfig or DevConfig
-app.config.from_object(DevConfig)
+app.config.from_object(ProdConfig)
 
 SQLALCHEMY_DATABASE_URI = app.config['SQLALCHEMY_DATABASE_URI']
 SQLALCHEMY_TRACK_MODIFICATIONS = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
