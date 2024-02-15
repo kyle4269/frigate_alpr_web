@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <title>Plate Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Change the font of the entire body */
+        }
+
+        h1 {
+            font-family: 'Georgia', serif; /* Specific font for the title */
+            font-size: 35px; /* Increase font size */
+            color: #333; /* Change the color */
+        }
+
+
+        input[type="text"] {
+            font-size: 25px; /* Increase font size */
+            width: 220px; /* Increase width */
+            padding: 10px; /* Add more padding */
+            margin: 10px 0; /* Add margin */
+        }
+
+        input[type="submit"] {
+            font-size: 25px; /* Increase font size */
+            padding: 10px 20px; /* Increase padding */
+            cursor: pointer; /* Change cursor on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Search License Plates</h1>
+    <form action="/search" method="post">
+        <input type="text" name="search_term" placeholder="Enter plate number...">
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>

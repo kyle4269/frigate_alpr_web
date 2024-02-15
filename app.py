@@ -32,80 +32,21 @@ def serve_plate_image(filename):
 
 @app.route('/menu')
 def menu():
-    return render_template_string('''
-        <!doctype html>
-        <html>
-        <head>
-            <title>Main Menu</title>
-            <style>
-                body {
-                    font-size: 35px; /* Increase font size for the menu */
-                }
-                /* Add additional styling here as needed */
-            </style>
-        </head>
-        <body>
-            <h1>Main Menu</h1>
-            <ul>
-                <li><a href="/search_page">Search License Plates</a></li>
-                <li><a href="/logs">View Logs</a></li>
-            </ul>
-        </body>
-        </html>
-    ''')
-
+    return render_template('main.html')
 @app.route('/search_page', methods=['GET'])
 def search_page():
-    return render_template_string('''
-        <!doctype html>
-        <html>
-        <head>
-            <title>Plate Search</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif; /* Change the font of the entire body */
-                }
-
-                h1 {
-                    font-family: 'Georgia', serif; /* Specific font for the title */
-                    font-size: 35px; /* Increase font size */
-                    color: #333; /* Change the color */
-                }
-
-
-                input[type="text"] {
-                    font-size: 25px; /* Increase font size */
-                    width: 200px; /* Increase width */
-                    padding: 10px; /* Add more padding */
-                    margin: 10px 0; /* Add margin */
-                }
-
-                input[type="submit"] {
-                    font-size: 25px; /* Increase font size */
-                    padding: 10px 20px; /* Increase padding */
-                    cursor: pointer; /* Change cursor on hover */
-                }
-            </style>
-        </head>
-        <body>
-            <h1>Search License Plates</h1>
-            <form action="/search" method="post">
-                <input type="text" name="search_term" placeholder="Enter plate number...">
-                <input type="submit" value="Search">
-            </form>
-        </body>
-        </html>
-    ''')
+    return render_template('search_page.html')
 
 @app.route('/search', methods=['POST'])
 def search():
     search_term = request.form['search_term']
+
     search_term = search_term.replace('*', '%')
+
     if not search_term.startswith('%'):
         search_term = '%' + search_term
     if not search_term.endswith('%'):
         search_term += '%'
-
     results = Plates.query.filter(Plates.plate_number.like(f'%{search_term}%')).order_by(Plates.detection_time.desc()).all()
     return render_template('search_results.html', results=results)
 
