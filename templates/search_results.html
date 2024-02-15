@@ -4,27 +4,41 @@
     <title>Search Results</title>
     <style>
         body {
-            font-family: Arial, sans-serif; /* Improve font */
-            margin: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font-family */
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Light background color */
+            color: #333; /* Darker font color for contrast */
+        }
+        .results-header h2 {
+            text-align: center; /* Center-align the title */
+            margin: 50px 0; /* Adjusted spacing */
+            font-family: 'Georgia', serif; /* Consistent font for titles */
         }
         table {
-            width: 100%;
-            border-collapse: collapse;
+            width: 80%; /* Adjust table width */
+            margin: 0 auto; /* Center table horizontally */
+            border-collapse: collapse; /* Collapse borders */
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1); /* Add subtle shadow for depth */
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+            border: 1px solid #ddd; /* Light gray border */
+            padding: 10px; /* Increase padding */
+            text-align: left; /* Align text to the left */
         }
         th {
-            background-color: #007bff; <!--#4CAF50-->;
-            color: white;
+            background-color: #007bff; /* Consistent blue header */
+            color: white; /* White text for header */
         }
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #f2f2f2; /* Zebra striping for rows */
         }
-        .results-header {
-            margin-bottom: 20px;
+        a {
+            color: #007bff; /* Consistent link color */
+            text-decoration: none; /* No underline */
+        }
+        a:hover {
+            text-decoration: underline; /* Underline on hover for links */
         }
     </style>
 </head>
@@ -57,3 +71,4 @@
     </table>
 </body>
 </html>
+
