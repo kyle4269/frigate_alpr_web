@@ -4,27 +4,50 @@
     <title>Plate Search</title>
     <style>
         body {
-            font-family: Arial, sans-serif; /* Change the font of the entire body */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font-family */
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Light background color */
+            color: #333; /* Darker font color for contrast */
         }
 
         h1 {
+            text-align: center; /* Center-align the title */
+            margin-top: 50px; /* Add some spacing on the top */
             font-family: 'Georgia', serif; /* Specific font for the title */
             font-size: 35px; /* Increase font size */
             color: #333; /* Change the color */
         }
 
+        form {
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Align items in a column */
+            align-items: center; /* Center items horizontally */
+            gap: 10px; /* Add space between form elements */
+        }
 
         input[type="text"] {
-            font-size: 25px; /* Increase font size */
-            width: 220px; /* Increase width */
+            font-size: 20px; /* Adjust font size */
+            width: 300px; /* Increase width */
             padding: 10px; /* Add more padding */
+            border: 2px solid #007bff; /* Add border to match theme */
+            border-radius: 5px; /* Rounded corners for the input */
             margin: 10px 0; /* Add margin */
         }
 
         input[type="submit"] {
-            font-size: 25px; /* Increase font size */
+            font-size: 20px; /* Adjust font size */
             padding: 10px 20px; /* Increase padding */
             cursor: pointer; /* Change cursor on hover */
+            background-color: #007bff; /* Background color to match theme */
+            color: white; /* Text color */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
         }
     </style>
 </head>
