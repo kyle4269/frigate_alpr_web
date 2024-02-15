@@ -1,62 +1,94 @@
 <!doctype html>
 <html>
-<head> 
+<head>
     <title>Frigate ALPR</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a modern font-family */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4; /* Light background color */
-            color: #333; /* Darker font color for contrast */
+            background-color: #f4f4f4;
+            color: #333;
         }
 
-        h1 {
-            text-align: center; /* Center-align the title */
-            margin-top: 50px; /* Add some spacing on the top */
-            font-size: 36px;
-        }
-
-        h2 {
-            text-align: center; /* Center-align the subtitle */
-            margin-top: 50px; /* Add some spacing on the top */
+        h1, h2 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 36px; /* Only affects h1 */
         }
 
         ul {
-            list-style: none; /* Remove default list styling */
+            list-style: none;
             padding: 0;
-            display: flex; /* Use flexbox for layout */
-            justify-content: center; /* Center items horizontally */
-            gap: 20px; /* Add space between items */
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
         li {
-            background-color: #007bff; /* A pleasant blue background */
-            padding: 10px 20px; /* Padding inside each menu item */
-            border-radius: 5px; /* Rounded corners for the menu items */
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
         }
 
-        a {
-            text-decoration: none; /* Remove underline from links */
-            color: white; /* White text for better contrast */
-            font-weight: bold; /* Make the font bold */
+        a, a:hover {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
         }
 
-        log-section {
-            background-color: #eeeeee; /* Light grey background for the log section */
-            margin: 20px auto; /* Center the log section with auto margins */
-            padding: 20px; /* Padding inside the log section */
-            border-radius: 5px; /* Rounded corners for the log section */
-            width: 80%; /* Set a max width for the log section */
+        #log-section {
+            background-color: #eeeeee;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 80%;
         }
+
         #log-section > div {
-            background-color: #fff; /* Set a white background for log entries */
-            border: 1px solid #ddd; /* Add a border around log entries for definition */
-            border-radius: 5px; /* Round the corners of the borders */
-            padding: 15px; /* Add padding inside log entries */
-            margin-top: 20px; /* Add space between the heading and log entries */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
         }
-    </style>
+
+        .results-header h2 {
+            margin: 50px 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .license-plates-table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+
+        .license-plates-table th, .license-plates-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .license-plates-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .license-plates-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Adjust the link color for consistency */
+        .license-plates-table a {
+            color: #007bff;
+        }
+
+        .license-plates-table a:hover {
+            text-decoration: underline;
+        }
+   </style>
 </head>
 <body>
     <h1>Frigate ALPR</h1>
@@ -65,6 +97,33 @@
         <li><a href="/search_page">Search License Plates</a></li>
         <li><a href="/logs">View Logs</a></li>
     </ul>
+    <div class="results-header">
+        <h2>Last 5 Detected License Plates</h2>
+    </div>
+    <table class="license-plates-table">
+        <thead>
+            <tr>
+                <th>Camera</th>
+                <th>Plate</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in results %}
+                <tr>
+                    <td>{{ record.camera_name }}</td>
+                    <td>
+                        {% if record.has_image %}
+                        <a href="{{ url_for('serve_plate_image', filename=record.has_image) }}">{{ record.plate_number.upper() }}</a>
+                        {% else %}
+                            {{ record.plate_number.upper() }}
+                       {% endif %}
+                    </td>
+                    <td>{{ record.detection_time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <!-- Log Display Section -->
     <div id="log-section">
         <h2>Error Logs</h2>

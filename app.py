@@ -3,6 +3,7 @@ import os
 
 from flask import Flask, request, render_template_string, render_template, redirect, url_for, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
 from waitress import serve
 
 app = Flask(__name__)
@@ -41,10 +42,13 @@ def menu():
     except Exception as e:
         error_logs = [f"Error reading log file: {e}"]
     error_log_html = '<br>'.join(error_logs)
-    return render_template('main.html', error_log_html=error_log_html)
 
+    # Retrieve the last 5 detected license plates
+    results = Plates.query.order_by(desc(Plates.detection_time)).limit(5).all()
 
-#    return render_template('main.html')
+    error_log_html = '<br>'.join(error_logs)
+    return render_template('main.html', error_log_html=error_log_html, results=results)
+#    return render_template('main.html', error_log_html=error_log_html)
 
 @app.route('/search_page', methods=['GET'])
 def search_page():
@@ -60,6 +64,7 @@ def search():
         search_term = '%' + search_term
     if not search_term.endswith('%'):
         search_term += '%'
+
     results = Plates.query.filter(Plates.plate_number.like(f'%{search_term}%')).order_by(Plates.detection_time.desc()).all()
     return render_template('search_results.html', results=results)
 
