@@ -6,9 +6,17 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from waitress import serve
 
+# Config
+from config import DevConfig, ProdConfig, Config
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/lpr/dev/config/frigate_plate_recogizer.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Change to ProdConfig or DevConfig
+app.config.from_object(DevConfig)
+
+SQLALCHEMY_DATABASE_URI = app.config['SQLALCHEMY_DATABASE_URI']
+SQLALCHEMY_TRACK_MODIFICATIONS = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+SECRET_KEY = app.config['SECRET_KEY']
 
 db = SQLAlchemy(app)
 
@@ -33,7 +41,7 @@ def serve_plate_image(filename):
 
 @app.route('/menu')
 def menu():
-    log_file_path = '/home/lpr/dev/config/frigate_plate_recogizer.log'
+    log_file_path = app.config['LOG_FILE_PATH']
     try:
         with open(log_file_path, 'r') as file:
             all_logs = file.readlines()
@@ -48,7 +56,6 @@ def menu():
 
     error_log_html = '<br>'.join(error_logs)
     return render_template('main.html', error_log_html=error_log_html, results=results)
-#    return render_template('main.html', error_log_html=error_log_html)
 
 @app.route('/search_page', methods=['GET'])
 def search_page():
@@ -70,7 +77,7 @@ def search():
 
 @app.route('/logs')
 def all_logs():
-    log_file_path = '/home/lpr/dev/config/frigate_plate_recogizer.log'
+    log_file_path = app.config['LOG_FILE_PATH']
     try:
         with open(log_file_path, 'r') as file:
             # Read the last 50 lines of the log file
@@ -95,6 +102,6 @@ def get_ip():
 
 if __name__ == '__main__':
     ip_address = get_ip()
-#    serve(app, host=ip_address, port=5555)
+    serve(app, host=ip_address, port=5555)
     # To debug app
-    app.run(host=ip_address, port=5000, debug=True)
+#    app.run(host=ip_address, port=5000, debug=True)
