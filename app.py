@@ -69,7 +69,7 @@ def all_logs():
     try:
         with open(log_file_path, 'r') as file:
             # Read the last 50 lines of the log file
-            logs = file.readlines()[-50000:]
+            logs = file.readlines()[-50:]
             logs = logs[::-1]
     except Exception as e:
         logs = [f"Error reading log file: {e}"]
