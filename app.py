@@ -7,9 +7,9 @@ from sqlalchemy import desc
 from waitress import serve
 
 # Config
-from config import DevConfig, ProdConfig, Config
+from config import DevConfig, ProdConfig
 
-app = Flask(__name__)
+app = frigate_alpr_web(__name__)
 
 # Change to ProdConfig or DevConfig
 app.config.from_object(ProdConfig)
