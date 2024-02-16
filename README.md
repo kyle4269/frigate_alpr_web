@@ -17,7 +17,7 @@ To configure the Frigate ALPR Web Server, follow these steps:
 1. **Create Configuration File**: In the `frigate_alpr_web` directory, create a file named `config.py`.
 2. **Edit Configuration**: Populate `config.py` with the following class definitions, updating the placeholders with your specific details:
 
-\```python
+```python
 class Config(object):
     SECRET_KEY = 'YOUR_SECRET_KEY_HERE'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///PATH_TO/frigate_plate_recognizer.db'
@@ -29,7 +29,7 @@ class DevConfig(Config):
 
 class ProdConfig(Config):
     DEBUG = False
-\```
+```
 
 - `SECRET_KEY`: A secret key used for securing cookies and sessions.
 - `SQLALCHEMY_DATABASE_URI`: The database URI that should be used for the connection.
@@ -43,9 +43,9 @@ To start the Frigate ALPR Web Server:
 1. **Set the Port (Optional)**: The default port is `5555`. To change the port, modify the corresponding setting in the `app.py` file.
 2. **Launch the Server**:
 
-\```
+```
 python3 app.py
-\```
+```
 
 This command will start the web server using the IP address of the machine it's running on, listening on the specified (or default) port.
 
