@@ -2,7 +2,7 @@
 
 ### Config
 
-Create a file called config.py in the flask_web directory. Then, update everything in the Config class below.
+Create a file called config.py in the frigate_alpr_web directory. Then, update everything in the Config class below.
 
 ```
 class Config(object):
