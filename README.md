@@ -1,4 +1,4 @@
-# Frigate ALPR Flask WebServer
+# Frigate ALPR Web Server
 
 ### Config
 
