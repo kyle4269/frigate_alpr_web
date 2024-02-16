@@ -38,6 +38,10 @@ class ProdConfig(Config):
 
 ## Running the Server
 
+**You must install these packages before running the application.
+```
+pip install Flask Flask-SQLAlchemy waitress
+```
 To start the Frigate ALPR Web Server:
 
 1. **Set the Port (Optional)**: The default port is `5555`. To change the port, modify the corresponding setting in the `app.py` file.
