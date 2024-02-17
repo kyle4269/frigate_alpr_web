@@ -45,7 +45,7 @@ def menu():
     try:
         with open(log_file_path, 'r') as file:
             all_logs = file.readlines()
-            error_logs = [log for log in all_logs if "ERROR" in log][-50:]  # Adjust the slice as needed
+            error_logs = [log for log in all_logs if "ERROR" in log][-5:]  # Adjust the slice as needed
             error_logs = error_logs[::-1]  # Reverse for chronological order
     except Exception as e:
         error_logs = [f"Error reading log file: {e}"]
