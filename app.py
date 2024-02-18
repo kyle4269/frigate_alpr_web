@@ -1,5 +1,6 @@
 import socket
 import os
+import time
 
 from flask import Flask, request, render_template_string, render_template, redirect, url_for, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
@@ -74,6 +75,22 @@ def search():
 
     results = Plates.query.filter(Plates.plate_number.like(f'%{search_term}%')).order_by(Plates.detection_time.desc()).all()
     return render_template('search_results.html', results=results)
+
+@app.route('/allplates')
+def all_plates():
+    directory = '/mnt/plates'
+    try:
+        # List all files in the directory
+        files = os.listdir(directory)
+        # Create a list of tuples (file, modification time)
+        files_with_time = [(file, os.path.getmtime(os.path.join(directory, file))) for file in files if file.endswith(('.png', '.jpg', '.jpeg'))]
+        # Sort the list by modification time in descending order
+        files_sorted = sorted(files_with_time, key=lambda x: x[1], reverse=True)
+        # Convert modification time to human-readable format
+        image_files = [(file, time.ctime(mod_time)) for file, mod_time in files_sorted]
+    except Exception as e:
+        image_files = [f"Error accessing directory: {e}", '']
+    return render_template('allplates.html', image_files=image_files)
 
 @app.route('/logs')
 def all_logs():

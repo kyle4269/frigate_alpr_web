@@ -40,10 +40,15 @@
         a:hover {
             text-decoration: underline; /* Underline on hover for links */
         }
+        .back-link {
+            margin-top: 20px;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="results-header">
+        <a href="{{ url_for('menu') }}" class="back-link">Back to Main</a>
         <h2>Search Results</h2>
     </div>
     <table>
