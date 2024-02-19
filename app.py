@@ -18,6 +18,7 @@ app.config.from_object(ProdConfig)
 SQLALCHEMY_DATABASE_URI = app.config['SQLALCHEMY_DATABASE_URI']
 SQLALCHEMY_TRACK_MODIFICATIONS = app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
 SECRET_KEY = app.config['SECRET_KEY']
+IMAGE_MNT_LOCATION = app.config['IMAGE_MNT_LOCATION']
 
 db = SQLAlchemy(app)
 
@@ -38,7 +39,8 @@ def index():
 # Assuming /mnt/plates is the directory where images are stored
 @app.route('/plates/<filename>')
 def serve_plate_image(filename):
-    return send_from_directory('/mnt/plates', filename)
+#    return send_from_directory('/mnt/plates', filename)
+    return send_from_directory(app.config['IMAGE_MNT_LOCATION'], filename)
 
 @app.route('/menu')
 def menu():
@@ -78,7 +80,7 @@ def search():
 
 @app.route('/allplates')
 def all_plates():
-    directory = '/mnt/plates'
+    directory = app.config['IMAGE_MNT_LOCATION']
     try:
         # List all files in the directory
         files = os.listdir(directory)

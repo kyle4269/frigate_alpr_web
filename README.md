@@ -23,6 +23,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///PATH_TO/frigate_plate_recognizer.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LOG_FILE_PATH = '/PATH_TO/frigate_plate_recognizer.log'
+    IMAGE_MNT_LOCATION = '/PATH_TO/PLATES'
 
 class DevConfig(Config):
     DEBUG = True
@@ -35,6 +36,7 @@ class ProdConfig(Config):
 - `SQLALCHEMY_DATABASE_URI`: The database URI that should be used for the connection.
 - `SQLALCHEMY_TRACK_MODIFICATIONS`: Set to `False` to disable Flask-SQLAlchemy event system.
 - `LOG_FILE_PATH`: The path to where the server logs should be stored.
+- `IMAGE_MNT_LOCATION`: The path to where the images are stored.
 
 ## Running the Server
 
