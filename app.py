@@ -4,6 +4,7 @@ import time
 
 from flask import Flask, request, render_template_string, render_template, redirect, url_for, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 from sqlalchemy import desc
 from waitress import serve
 
@@ -81,18 +82,28 @@ def search():
 @app.route('/allplates')
 def all_plates():
     directory = app.config['IMAGE_MNT_LOCATION']
+    total_size = 0
+    file_count = 0
     try:
         # List all files in the directory
         files = os.listdir(directory)
-        # Create a list of tuples (file, modification time)
-        files_with_time = [(file, os.path.getmtime(os.path.join(directory, file))) for file in files if file.endswith(('.png', '.jpg', '.jpeg'))]
+        # Filter and calculate file count and total size
+        image_files = []
+        for file in files:
+            if file.endswith(('.png', '.jpg', '.jpeg')):
+                file_path = os.path.join(directory, file)
+                total_size += os.path.getsize(file_path)
+                file_count += 1
+                mod_time = os.path.getmtime(file_path)
+                image_files.append((file, time.ctime(mod_time)))
         # Sort the list by modification time in descending order
-        files_sorted = sorted(files_with_time, key=lambda x: x[1], reverse=True)
-        # Convert modification time to human-readable format
-        image_files = [(file, time.ctime(mod_time)) for file, mod_time in files_sorted]
+        image_files.sort(key=lambda x: x[1], reverse=True)
     except Exception as e:
         image_files = [f"Error accessing directory: {e}", '']
-    return render_template('allplates.html', image_files=image_files)
+        total_size = 0
+        file_count = 0
+
+    return render_template('allplates.html', image_files=image_files, total_size=total_size, file_count=file_count)
 
 @app.route('/logs')
 def all_logs():

@@ -45,6 +45,10 @@
 <body>
     <a href="{{ url_for('menu') }}" class="back-link">Back to Main</a>
     <h1>All Saved Images</h1>
+    <div class="summary">
+        <p>Total Files: {{ file_count }}</p>
+        <p>Total Size: {{ total_size | filesizeformat }}</p>
+    </div>
     <div class="results">
         <table>
             <thead>
