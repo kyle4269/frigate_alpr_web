@@ -98,6 +98,7 @@ def all_plates():
                 image_files.append((file, time.ctime(mod_time)))
         # Sort the list by modification time in descending order
         image_files.sort(key=lambda x: x[1], reverse=True)
+        image_files = [(file, time.ctime(mod_time)) for file, mod_time in image_files]
     except Exception as e:
         image_files = [f"Error accessing directory: {e}", '']
         total_size = 0
