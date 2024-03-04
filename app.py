@@ -95,7 +95,7 @@ def all_plates():
                 total_size += os.path.getsize(file_path)
                 file_count += 1
                 mod_time = os.path.getmtime(file_path)
-                image_files.append((file, time.ctime(mod_time)))
+                image_files.append((file, mod_time))
         # Sort the list by modification time in descending order
         image_files.sort(key=lambda x: x[1], reverse=True)
         image_files = [(file, time.ctime(mod_time)) for file, mod_time in image_files]
