@@ -134,6 +134,6 @@ def get_ip():
 
 if __name__ == '__main__':
     ip_address = get_ip()
-#    serve(app, host=ip_address, port=5555)
+    serve(app, host=ip_address, port=5555)
     # To debug app
-    app.run(host=ip_address, port=5000, debug=True)
+#    app.run(host=ip_address, port=5000, debug=True)
