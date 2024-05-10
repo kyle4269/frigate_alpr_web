@@ -20,7 +20,7 @@ To configure the Frigate ALPR Web Server, follow these steps:
 ```python
 class Config(object):
     SECRET_KEY = 'YOUR_SECRET_KEY_HERE'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///PATH_TO/frigate_alpr.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////PATH_TO/frigate_alpr.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LOG_FILE_PATH = '/PATH_TO/frigate_alpr.log'
     IMAGE_MNT_LOCATION = '/PATH_TO/PLATES'
