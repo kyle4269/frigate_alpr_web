@@ -1,5 +1,7 @@
 # Frigate ALPR Web Server Documentation
 
+**This project is no longer being developed due to LPR being included in Frigate 0.16.**
+
 ## Introduction
 
 The Frigate ALPR Web Server is a companion script designed to seamlessly integrate with the [Frigate ALPR](https://github.com/kyle4269/frigate_alpr) system. This web server enhances the functionality of Frigate ALPR by providing a user-friendly interface to search, view, and manage license plate recognition data and associated images stored in the database.
